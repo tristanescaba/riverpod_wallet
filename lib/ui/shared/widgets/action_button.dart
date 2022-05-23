@@ -4,24 +4,21 @@ import 'package:riverpod_wallet/ui/shared/utils/constants.dart';
 class ActionButton extends StatelessWidget {
   final String title;
   final IconData icon;
-  final bool enable;
-  final Function onPressed;
+  final void Function()? onPressed;
 
   const ActionButton({
+    super.key,
     required this.title,
     required this.icon,
-    this.enable = true,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        enable ? onPressed : null;
-      },
+      onTap: onPressed,
       child: Card(
-        elevation: enable ? 4.0 : 0.0,
+        elevation: 4.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -31,7 +28,7 @@ class ActionButton extends StatelessWidget {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundColor: enable ? kPrimaryColor : kPrimaryLightColor,
+                backgroundColor: kPrimaryColor,
                 foregroundColor: Colors.white,
                 child: Icon(icon),
               ),
@@ -39,7 +36,7 @@ class ActionButton extends StatelessWidget {
               FittedBox(
                 child: Text(
                   title,
-                  style: TextStyle(color: enable ? Colors.black87 : Colors.black38),
+                  style: const TextStyle(color: Colors.black87),
                 ),
               ),
             ],

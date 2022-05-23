@@ -12,22 +12,24 @@ class DefaultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.0),
-            // side: BorderSide(color: Colors.red),
+    return SafeArea(
+      child: ElevatedButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50.0),
+              // side: BorderSide(color: Colors.red),
+            ),
           ),
         ),
-      ),
-      onPressed: () {
-        onPressed();
-      },
-      child: SizedBox(
-        width: double.infinity,
-        height: 50.0,
-        child: Center(child: Text(title, style: const TextStyle(fontSize: 17.0))),
+        onPressed: () {
+          onPressed();
+        },
+        child: SizedBox(
+          width: double.infinity,
+          height: 50.0,
+          child: Center(child: Text(title, style: const TextStyle(fontSize: 17.0))),
+        ),
       ),
     );
   }

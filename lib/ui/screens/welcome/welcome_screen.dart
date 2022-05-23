@@ -48,13 +48,11 @@ class WelcomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const Spacer(),
-                  SafeArea(
-                    child: DefaultButton(
-                      title: 'Log in',
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardScreen()));
-                      },
-                    ),
+                  DefaultButton(
+                    title: 'Log in',
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardScreen()));
+                    },
                   ),
                 ],
               ),
