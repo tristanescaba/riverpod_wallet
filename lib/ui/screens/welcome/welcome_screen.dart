@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_wallet/ui/screens/dashboard/dashboard_screen.dart';
 import 'package:riverpod_wallet/ui/shared/utils/constants.dart';
-import 'package:riverpod_wallet/ui/shared/widgets/default_button_widget.dart';
+import 'package:riverpod_wallet/ui/shared/widgets/default_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

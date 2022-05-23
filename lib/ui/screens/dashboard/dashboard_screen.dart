@@ -9,77 +9,113 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(color: kPrimaryColor),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            title: const Text('Riverpod Wallet'),
-            automaticallyImplyLeading: false,
-            centerTitle: false,
+    Future<bool> _showLogoutDialog() async {
+      return (await showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => AlertDialog(
+              title: const Text('Logout'),
+              content: const Text('Are you sure you want to logout?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                  child: const Text(
+                    'No',
+                    style: TextStyle(color: Colors.black87, fontSize: 12.0),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  },
+                  child: const Text(
+                    'Yes',
+                    style: TextStyle(color: kPrimaryColor, fontSize: 12.0),
+                  ),
+                ),
+              ],
+            ),
+          )) ??
+          false;
+    }
+
+    return WillPopScope(
+      onWillPop: _showLogoutDialog,
+      child: Stack(
+        children: [
+          Container(color: kPrimaryColor),
+          Scaffold(
             backgroundColor: Colors.transparent,
-            elevation: 0.0,
-            actions: [
-              IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.exit_to_app_rounded),
-              )
-            ],
-          ),
-          body: SafeArea(
-            bottom: false,
-            child: SlidingUpPanel(
-              minHeight: MediaQuery.of(context).size.height * 0.4,
-              maxHeight: MediaQuery.of(context).size.height,
-              parallaxEnabled: true,
-              panelBuilder: (controller) => const HistoryPanel(),
-              body: Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.35,
-                    child: RefreshIndicator(
-                      onRefresh: () async {
-                        // user.getBalance();
-                      },
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height / 2,
-                        width: double.infinity,
-                        child: const Center(
-                            child: Text(
-                          'PHP 10,000.00',
-                          style: TextStyle(fontSize: 20.0, color: Colors.white),
-                        )),
+            appBar: AppBar(
+              title: const Text('Riverpod Wallet'),
+              automaticallyImplyLeading: false,
+              centerTitle: false,
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
+              actions: [
+                IconButton(
+                  onPressed: _showLogoutDialog,
+                  icon: const Icon(Icons.exit_to_app_rounded),
+                )
+              ],
+            ),
+            body: SafeArea(
+              bottom: false,
+              child: SlidingUpPanel(
+                minHeight: MediaQuery.of(context).size.height * 0.4,
+                maxHeight: MediaQuery.of(context).size.height,
+                parallaxEnabled: true,
+                panelBuilder: (controller) => const HistoryPanel(),
+                body: Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.35,
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          // user.getBalance();
+                        },
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height / 2,
+                          width: double.infinity,
+                          child: const Center(
+                              child: Text(
+                            'PHP 10,000.00',
+                            style: TextStyle(fontSize: 20.0, color: Colors.white),
+                          )),
+                        ),
                       ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ActionButton(
-                        icon: Icons.download_rounded,
-                        title: 'Cash-in',
-                        // enable: !user.isBalanceLoading,
-                        onPressed: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => MyQRScreen()));
-                        },
-                      ),
-                      ActionButton(
-                        icon: Icons.near_me_outlined,
-                        title: 'Transfer',
-                        // enable: !user.isBalanceLoading,
-                        onPressed: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => FundTransferScreen()));
-                        },
-                      ),
-                    ],
-                  ),
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ActionButton(
+                          icon: Icons.download_rounded,
+                          title: 'Cash-in',
+                          // enable: !user.isBalanceLoading,
+                          onPressed: () {
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => MyQRScreen()));
+                          },
+                        ),
+                        ActionButton(
+                          icon: Icons.near_me_outlined,
+                          title: 'Transfer',
+                          // enable: !user.isBalanceLoading,
+                          onPressed: () {
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => FundTransferScreen()));
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
