@@ -6,10 +6,10 @@ import 'package:riverpod_wallet/ui/shared/utils/constants.dart';
 import 'package:riverpod_wallet/ui/shared/widgets/default_button.dart';
 import 'package:riverpod_wallet/ui/shared/widgets/information_tile.dart';
 
-class CashInPage4 extends ConsumerWidget {
+class FundTransferPage4 extends ConsumerWidget {
   final PageController pageController;
 
-  const CashInPage4({
+  const FundTransferPage4({
     Key? key,
     required this.pageController,
   }) : super(key: key);
@@ -39,16 +39,16 @@ class CashInPage4 extends ConsumerWidget {
                       ),
                       SizedBox(height: 10.0),
                       Text(
-                        'Transaction Successful!',
+                        'Transfer Successful!',
                         style: TextStyle(fontSize: 17.0),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 25.0),
-                InformationTile(title: 'Source account:', value: ref.watch(prSelectedBank)),
+                InformationTile(title: 'Source account:', value: ref.watch(prAccountNumber)),
                 const Divider(),
-                InformationTile(title: 'Target account:', value: ref.watch(prAccountNumber)),
+                InformationTile(title: 'Target account:', value: ref.watch(prTargetAccount)),
                 const Divider(),
                 InformationTile(title: 'Deposit amount:', value: 'PHP ${number.format(ref.watch(prTransferAmount))}'),
                 const Divider(),

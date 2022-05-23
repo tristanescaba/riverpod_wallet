@@ -4,10 +4,10 @@ import 'package:riverpod_wallet/core/providers/account_provider.dart';
 import 'package:riverpod_wallet/core/providers/transaction_provider.dart';
 import 'package:riverpod_wallet/ui/shared/utils/constants.dart';
 
-class CashInPage3 extends ConsumerWidget {
+class FundTransferPage3 extends ConsumerWidget {
   final PageController pageController;
 
-  const CashInPage3({
+  const FundTransferPage3({
     Key? key,
     required this.pageController,
   }) : super(key: key);
@@ -21,13 +21,13 @@ class CashInPage3 extends ConsumerWidget {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 22.0),
             child: Text(
-              'For your verification, please input the OTP you received.',
+              'For your verification, please input your MPIN.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 17.0),
             ),
           ),
           const Text(
-            'Type below the OTP:',
+            'Type your MPIN below:',
             style: TextStyle(color: kTextColor),
           ),
           Padding(
@@ -41,7 +41,7 @@ class CashInPage3 extends ConsumerWidget {
               onChanged: (value) {
                 if (value.length == 6) {
                   FocusScope.of(context).requestFocus(FocusNode());
-                  ref.read(prAccountBalance.notifier).state = ref.read(prAccountBalance.notifier).state + ref.read(prTransferAmount.notifier).state;
+                  ref.read(prAccountBalance.notifier).state = ref.read(prAccountBalance.notifier).state - ref.read(prTransferAmount.notifier).state;
                   pageController.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.ease);
                 }
               },

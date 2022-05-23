@@ -60,8 +60,8 @@ class CashInPage1 extends ConsumerWidget {
                     return 'Please input an amount.';
                   } else if (double.parse(value) < 50.00) {
                     return 'Minimum amount is PHP 50.00.';
-                  } else if (double.parse(value) > 50000.00) {
-                    return 'Maximum amount is PHP 50,000.00.';
+                  } else if (double.parse(value) > 20000.00) {
+                    return 'Maximum amount is PHP 20,000.00.';
                   }
                 } catch (e) {
                   return 'Please input only a number.';
