@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_wallet/core/models/transaction_model.dart';
 import 'package:riverpod_wallet/core/providers/account_provider.dart';
 import 'package:riverpod_wallet/core/providers/transaction_provider.dart';
 import 'package:riverpod_wallet/ui/shared/utils/constants.dart';
+
+final transactionProvider = StateNotifierProvider((ref) {
+  return TransactionProvider();
+});
 
 class CashInPage3 extends ConsumerWidget {
   final PageController pageController;
@@ -14,6 +19,8 @@ class CashInPage3 extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final transaction = ref.read(transactionProvider.notifier);
+
     return Padding(
       padding: const EdgeInsets.all(kScreenPadding),
       child: Column(
@@ -42,6 +49,14 @@ class CashInPage3 extends ConsumerWidget {
                 if (value.length == 6) {
                   FocusScope.of(context).requestFocus(FocusNode());
                   ref.read(prAccountBalance.notifier).state = ref.read(prAccountBalance.notifier).state + ref.read(prTransferAmount.notifier).state;
+                  transaction.addRecord(
+                    TransactionModel(
+                      source: ref.read(prSelectedBank.notifier).state,
+                      target: ref.read(prAccountNumber.notifier).state,
+                      amount: double.parse(ref.read(prTransferAmount.notifier).state.toString()),
+                      trnType: 'Cash-in',
+                    ),
+                  );
                   pageController.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.ease);
                 }
               },

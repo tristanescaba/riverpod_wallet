@@ -33,7 +33,7 @@ class FundTransferPage1 extends ConsumerWidget {
               ),
               maxLength: 11,
               keyboardType: TextInputType.number,
-              validator: (String? value) {
+              validator: (value) {
                 try {
                   if (value!.isEmpty) {
                     return 'Please enter a number.';
@@ -43,13 +43,15 @@ class FundTransferPage1 extends ConsumerWidget {
                 } catch (e) {
                   return 'Please input only a number.';
                 }
+
+                return null;
               },
             ),
             TextFormField(
               controller: _amountFieldController,
               decoration: const InputDecoration(label: Text('Amount:')),
               keyboardType: TextInputType.number,
-              validator: (String? value) {
+              validator: (value) {
                 try {
                   if (value!.isEmpty) {
                     return 'Please input an amount.';
@@ -63,6 +65,8 @@ class FundTransferPage1 extends ConsumerWidget {
                 } catch (e) {
                   return 'Please input only a number.';
                 }
+
+                return null;
               },
             ),
             const Spacer(),

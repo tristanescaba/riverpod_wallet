@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_wallet/core/providers/account_provider.dart';
 import 'package:riverpod_wallet/ui/screens/dashboard/dashboard_screen.dart';
 import 'package:riverpod_wallet/ui/shared/utils/constants.dart';
 import 'package:riverpod_wallet/ui/shared/widgets/default_button.dart';
@@ -34,7 +36,14 @@ class WelcomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('09123456789  |  ', style: TextStyle(color: kTextColor, fontWeight: FontWeight.w300)),
+                Consumer(
+                  builder: (context, ref, child) {
+                    return Text(
+                      '${ref.watch(prAccountNumber)}  |  ',
+                      style: const TextStyle(color: kTextColor, fontWeight: FontWeight.w300),
+                    );
+                  },
+                ),
                 GestureDetector(
                   onTap: () {},
                   child: const Text(

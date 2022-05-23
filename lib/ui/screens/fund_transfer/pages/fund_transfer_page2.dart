@@ -32,7 +32,7 @@ class FundTransferPage2 extends ConsumerWidget {
                   child: Column(
                     children: const [
                       Icon(
-                        Icons.near_me_outlined,
+                        Icons.near_me_rounded,
                         color: kPrimaryColor,
                         size: 35.0,
                       ),

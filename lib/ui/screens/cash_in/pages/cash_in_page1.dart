@@ -20,7 +20,6 @@ class CashInPage1 extends ConsumerWidget {
     'UB',
     'CIMB',
   ];
-  String _selectedBank = 'BPI';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,7 +53,7 @@ class CashInPage1 extends ConsumerWidget {
               controller: _amountFieldController,
               decoration: const InputDecoration(label: Text('Amount:')),
               keyboardType: TextInputType.number,
-              validator: (String? value) {
+              validator: (value) {
                 try {
                   if (value!.isEmpty) {
                     return 'Please input an amount.';
@@ -66,6 +65,8 @@ class CashInPage1 extends ConsumerWidget {
                 } catch (e) {
                   return 'Please input only a number.';
                 }
+
+                return null;
               },
             ),
           ),

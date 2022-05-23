@@ -15,15 +15,13 @@ class MenuView extends StatelessWidget {
           icon: Icons.download_rounded,
           title: 'Cash-in',
           onPressed: () {
-            // ref.read(prAccountBalance.notifier).state++;
             Navigator.push(context, MaterialPageRoute(builder: (context) => const CashInScreen()));
           },
         ),
         ActionButton(
-          icon: Icons.near_me_outlined,
+          icon: Icons.near_me_rounded,
           title: 'Transfer',
           onPressed: () {
-            // ref.read(prAccountBalance.notifier).state--;
             Navigator.push(context, MaterialPageRoute(builder: (context) => const FundTransferScreen()));
           },
         ),
